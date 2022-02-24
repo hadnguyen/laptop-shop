@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Review extends Model
+{
+    use HasFactory;
+    protected $table = 'reviews';
+
+    public function user(){
+        return $this->belongsTo(User::class, 'users_id', 'id');
+    }
+
+    public function sanpham(){
+        return $this->belongsTo(Sanpham::class, 'sanpham_id', 'id');
+    }
+}
