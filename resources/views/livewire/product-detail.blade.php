@@ -134,8 +134,6 @@
                                                                 </div>
                                                             </div>
                                                         @endforeach
-                                                    @else
-                                                        <div class="text-center">Chưa có bình luận</div>
                                                     @endif
                                                 </div>
                                             </div>
@@ -209,7 +207,8 @@
                 readOnly: true
             });
         });
-
+    </script>
+    <script>
         $(function() {
             $("#rateYo").rateYo({
                 rating: 0,
