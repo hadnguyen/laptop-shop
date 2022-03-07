@@ -9,7 +9,6 @@
                                 <span class="cate-change">{{ $category->ten }}
                                     ({{ $category->sanphams->count() }})
                                 </span>
-
                             @else
                                 <span class="cate-select">{{ $category->ten }}
                                     ({{ $category->sanphams->count() }})</span>
@@ -62,7 +61,7 @@
                 </div>
             </div>
         @else
-            <div id="hide-filter" wire:ignore>
+            <div id="hide-filter" style="display:none;">
                 <div class="sidebar__item">
                     <h4 style="margin-bottom:0px;">Hãng sản xuất</h4>
                     <hr style="margin: 10px 0px;border: 2px solid #1c5d99;">
@@ -101,7 +100,6 @@
             // alert("Hello");
             document.getElementById('hide-filter').style.display = "none";
         }
-        document.getElementById('hide-filter').style.display = "none";
     </script>
 
     <script>

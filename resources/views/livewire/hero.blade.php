@@ -19,13 +19,13 @@
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="#">
+                            <form action="{{ route('shopsearch') }}">
                                 <div class="hero__search__categories">
                                     TÌM KIẾM
                                     <span class="arrow_carrot-down"></span>
                                 </div>
-                                <input type="text" id="key" name="key" wire:model="key" placeholder="Nhập tên sản phẩm">
-                                <button wire:click.prevent="search" type="button" class="site-btn fa fa-search"></button>
+                                <input type="text" id="key" name="key" placeholder="Nhập tên sản phẩm">
+                                <button type="submit" class="site-btn fa fa-search"></button>
                             </form>
                         </div>
                         <div class="hero__search__phone">
@@ -43,18 +43,21 @@
                         </div> --}}
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
-                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active">
+                                </li>
                                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                             </ol>
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
                                     <a href="{{ route('productdetail', $sanpham->id = 6) }}">
-                                        <img class="d-block w-100" src="{{ url('site') }}/img/carousel/carousel1.png" alt="First slide">
+                                        <img class="d-block w-100" src="{{ url('site') }}/img/carousel/carousel1.png"
+                                            alt="First slide">
                                     </a>
                                 </div>
                                 <div class="carousel-item">
                                     <a href="{{ route('productdetail', $sanpham->id = 10) }}">
-                                        <img class="d-block w-100" src="{{ url('site') }}/img/carousel/carousel2.jpg" alt="Second slide">
+                                        <img class="d-block w-100" src="{{ url('site') }}/img/carousel/carousel2.jpg"
+                                            alt="Second slide">
                                     </a>
                                 </div>
                             </div>
@@ -76,14 +79,3 @@
     </section>
     <!-- Hero Section End -->
 </div>
-
-@push('scripts')
-    <script>
-        document.getElementById('key').onkeypress = function(e) {
-        if (e.which === 13){
-            @this.call('search');
-            e.preventDefault();
-        }
-    }
-    </script>
-@endpush

@@ -169,14 +169,11 @@
                     <nav class="header__menu">
                         <ul>
                             <li @class([
-                                'active' => (Route::currentRouteName() == 'home')
+                                'active' => Route::currentRouteName() == 'home',
                             ])><a href="{{ route('home') }}">TRANG CHỦ</a></li>
                             <li @class([
-                                'active' => Route::currentRouteName() == 'shop'
+                                'active' => Route::currentRouteName() == 'shop',
                             ])><a href="{{ route('shop') }}">CỬA HÀNG</a>
-                                <ul class="header__menu__dropdown">
-                                    <li><a href="{{ route('shopsearch') }}">TÌM KIẾM</a></li>
-                                </ul>
                             </li>
                             {{-- <li @class([
                                 'active' => Route::currentRouteName() == 'cart',
@@ -189,7 +186,7 @@
                                 </ul>
                             </li> --}}
                             <li @class([
-                                'active' => Route::currentRouteName() == 'contact'
+                                'active' => Route::currentRouteName() == 'contact',
                             ])><a href="{{ route('contact') }}">LIÊN HỆ</a></li>
                         </ul>
                     </nav>

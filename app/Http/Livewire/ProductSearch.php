@@ -11,7 +11,7 @@ class ProductSearch extends Component
 {
     use WithPagination;
 
-    protected $listeners = ['updateSelection', 'updateSearch', 'updateRam', 'updateHSX'];
+    protected $listeners = ['updateSelection', 'updateRam', 'updateHSX'];
 
     protected $paginationTheme = 'bootstrap';
 
@@ -36,6 +36,7 @@ class ProductSearch extends Component
     {
         $this->minPrice = Sanpham::min('gia');
         $this->maxPrice = Sanpham::max('gia');
+        $this->key = $_GET['key'];
     }
 
     public function updateSelection($catid, $minPrice, $maxPrice)
@@ -43,12 +44,6 @@ class ProductSearch extends Component
         $this->selectionCatid = $catid;
         $this->minPrice = $minPrice;
         $this->maxPrice = $maxPrice;
-        $this->resetPage();
-    }
-
-    public function updateSearch($key)
-    {
-        $this->key = $key;
         $this->resetPage();
     }
 
@@ -92,6 +87,17 @@ class ProductSearch extends Component
 
     public function render()
     {
+        // $query = new Sanpham();
+        // if ($this->key) {
+        //     $query->where('ram', 'like', '%' . $this->key . '%');
+        // }
+        // if ($this->hsx)
+        //     $query->where('hangsanxuat', 'like', '%' . $this->hsx . '%');
+        // if ($this->ram)
+        //     $query->where('ram', 'like', '%' . $this->ram . '%');
+
+        // $products = $query->paginate(6);
+
         if (!is_null($this->selectionCatid)) {
             if ($this->sortid == 1) {
                 if (!is_null($this->key)) {

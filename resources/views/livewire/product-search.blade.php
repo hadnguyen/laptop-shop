@@ -67,7 +67,8 @@
                 <div class="col-sm-6">
                     <div class="product__item__pic">
                         <a href="{{ route('productdetail', $product->id) }}">
-                            <img style="margin-left:70px" src="{{ url('uploads') }}/{{ $product->anh }}" alt="Picture">
+                            <img style="margin-left:70px" src="{{ url('uploads') }}/{{ $product->anh }}"
+                                alt="Picture">
                         </a>
                         <ul class="product__item__pic__hover">
                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
@@ -98,7 +99,7 @@
     @endif
 
 
-{{ $products->links() }}
+    {{ $products->links() }}
 </div>
 
 @push('scripts')

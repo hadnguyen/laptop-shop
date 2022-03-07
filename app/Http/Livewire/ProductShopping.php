@@ -17,6 +17,7 @@ class ProductShopping extends Component
 
     protected $paginationTheme = 'bootstrap';
 
+
     public $sorts = [
         0 => 'Sắp xếp theo',
         1 => 'Giá tăng dần',

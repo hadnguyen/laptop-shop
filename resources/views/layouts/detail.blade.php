@@ -174,9 +174,9 @@
                             <li @class([
                                 'active' => Route::currentRouteName() == 'shop',
                             ])><a href="{{ route('shop') }}">CỬA HÀNG</a>
-                                <ul class="header__menu__dropdown">
+                                {{-- <ul class="header__menu__dropdown">
                                     <li><a href="{{ route('shopsearch') }}">TÌM KIẾM</a></li>
-                                </ul>
+                                </ul> --}}
                             </li>
                             {{-- <li @class([
                                 'active' => Route::currentRouteName() == 'cart',

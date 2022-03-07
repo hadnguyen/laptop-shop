@@ -71,7 +71,7 @@
                                 <div class="checkout__order__products">Sản phẩm <span></span></div>
                                 <ul>
                                     @foreach ($items as $item)
-                                        <li>{{ $item->name }}
+                                        <li>{{ $item->name }} ({{ $item->qty }})
                                             <span>{{ number_format($item->qty * $item->price) }}</span>
                                         </li>
                                     @endforeach

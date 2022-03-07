@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\SanphamDetail;
 use Illuminate\Http\Request;
 
 
@@ -16,9 +17,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $data=Order::orderBy("created_at", "DESC")->paginate(5);
-        if ($key=request()->key){
-            $data=Order::where('ten','like','%'.$key.'%')->paginate(5);
+        $data = Order::orderBy("created_at", "DESC")->paginate(5);
+        if ($key = request()->key) {
+            $data = Order::where('ten', 'like', '%' . $key . '%')->paginate(5);
         }
         // dd($data);
 
@@ -32,7 +33,6 @@ class OrderController extends Controller
      */
     public function create()
     {
-
     }
 
     /**
@@ -95,11 +95,16 @@ class OrderController extends Controller
                 "diachi.required" => "Cần nhập địa chỉ"
             ]
         );
-
-        if ($order->update($request->all())){
-            return redirect()->route('admin.order.index')->with('success', 'Cập nhật bản ghi thành công');
+        dd(date($order->created_at));
+        // $order_date = Order::
+        if ($request->trangthai == 0) {
+            $product_detail = SamphamDetail::whereDate('updated_at', '=', $request->created_at)
+                ->select('id')->get();
+            // dd($product_detail);
         }
-        else {
+        if ($order->update($request->all())) {
+            return redirect()->route('admin.order.index')->with('success', 'Cập nhật bản ghi thành công');
+        } else {
             return redirect()->route('admin.order.index')->with('error', "Lỗi cập nhật bản ghi");
         }
     }

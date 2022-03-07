@@ -21,31 +21,31 @@
                     Ngày đặt: {{ $order->order->created_at }}
                 </div>
             </div>
-            @break
-        @endforeach
-    </div>
+        @break
+    @endforeach
+</div>
 
-    <table style="border: solid black;margin-top: 22px;" class="table">
-        <thead>
+<table style="border: solid black;margin-top: 22px;" class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Mã đơn hàng</th>
+            <th>Sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Đơn giá</th>
+            <th>Thành tiền</th>
+            {{-- <th class="text-right">Action</th> --}}
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($orders as $order)
             <tr>
-                <th>Mã đơn hàng</th>
-                <th>Sản phẩm</th>
-                <th>Số lượng</th>
-                <th>Đơn giá</th>
-                <th>Thành tiền</th>
-                {{-- <th class="text-right">Action</th> --}}
+                <td scope="row">{{ $order->order_id }}</td>
+                <th>{{ $order->sanpham->ten }}</th>
+                <td>{{ $order->soluong }}</td>
+                <td>{{ number_format($order->gia) }}</td>
+                <td>{{ number_format($order->gia * $order->soluong) }}</td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach ($orders as $order)
-                <tr>
-                    <td scope="row">{{ $order->order_id }}</td>
-                    <th>{{ $order->sanpham->ten }}</th>
-                    <td>{{ $order->soluong }}</td>
-                    <td>{{ number_format($order->gia) }}</td>
-                    <td>{{ number_format($order->gia * $order->soluong) }}</td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+        @endforeach
+    </tbody>
+</table>
 @endsection

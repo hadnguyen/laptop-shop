@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\SanphamDetail;
 use Illuminate\Support\Facades\Auth;
 use Cart;
 use Livewire\Component;
@@ -49,9 +50,9 @@ class Checkout extends Component
                 $order_item->order_id = $order->id;
                 $order_item->gia = $i->price;
                 $order_item->soluong = $i->qty;
-
                 $order_item->save();
-
+                SanphamDetail::take($order_item->soluong)->where('trangthai', 2)->where('sanpham_id',  $order_item->sanpham_id)
+                    ->update(['trangthai' => 1]);
                 // dd($order_item);
             }
             Cart::destroy();
@@ -68,6 +69,5 @@ class Checkout extends Component
         $items = Cart::content();
         // return view('livewire.checkout', compact('items'))->layout('layouts.base');
         return view('livewire.checkout', compact('items'));
-
     }
 }

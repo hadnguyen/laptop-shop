@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\NhomsanphamController;
 use App\Http\Controllers\SanphamController;
+use App\Http\Controllers\SanphamDetailController;
 use App\Http\Controllers\UserManagementController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AdminLoginController;
@@ -25,19 +26,20 @@ use App\Http\Livewire\ProductDetail;
 //     return view('welcome');
 // });
 
-Route::get('/admin/login', [AdminLoginController::class,'getlogin'])->name('admin.getlogin');
-Route::post('/admin/login', [AdminLoginController::class,'postlogin'])->name('admin.postlogin');
-Route::get('/admin/logout', [AdminLoginController::class,'getlogout'])->name('admin.getlogout');
+Route::get('/admin/login', [AdminLoginController::class, 'getlogin'])->name('admin.getlogin');
+Route::post('/admin/login', [AdminLoginController::class, 'postlogin'])->name('admin.postlogin');
+Route::get('/admin/logout', [AdminLoginController::class, 'getlogout'])->name('admin.getlogout');
 
 Route::get("/register", [RegistrationController::class, 'create'])->name('register');
 Route::post("/register/create", [RegistrationController::class, 'store'])->name('register.create');
 
-Route::prefix('admin')->name('admin.')->middleware([CheckAdminLogin::class])->group(function(){
+Route::prefix('admin')->name('admin.')->middleware([CheckAdminLogin::class])->group(function () {
     Route::get('/', [AdminLoginController::class, 'dashboard'])->name('dashboard');
 
     Route::resources([
         'nhomsanpham' => NhomsanphamController::class,
         'sanpham' => SanphamController::class,
+        'sanpham_detail' => SanphamDetailController::class,
         'user' => UserManagementController::class,
         'order' => OrderController::class,
     ]);
@@ -78,6 +80,3 @@ Route::get('/checkout', function () {
 // Route::get('/checkout', Checkout::class)->name('checkout');
 
 Route::get('/productdetail/{id_p}', ProductDetail::class)->name('productdetail');
-
-
-

@@ -9,26 +9,35 @@ class Sanpham extends Model
 {
     use HasFactory;
     protected $table = 'sanpham';
-    protected $fillable = ['ten','mota','gia','giaban','hangsanxuat','cpu','ram','ocung','carddohoa','manhinh',
-    'anh','danhsachanh','trangthai','uutien','nhomsanphamid'];
+    protected $fillable = [
+        'ten', 'mota', 'gia', 'giaban', 'hangsanxuat', 'cpu', 'ram', 'ocung', 'carddohoa', 'manhinh',
+        'anh', 'danhsachanh', 'trangthai', 'uutien', 'nhomsanphamid'
+    ];
 
     // join 1-1
-    public function nhomsanphams(){
+    public function nhomsanphams()
+    {
         return $this->hasOne(Nhomsanpham::class, 'id', 'nhomsanphamid');
     }
     //join 1 - many
-    public function details(){
-        return $this->hasMany(OrderDetail::class, 'sanpham_id','id');
+    public function details()
+    {
+        return $this->hasMany(OrderDetail::class, 'sanpham_id', 'id');
     }
 
-    public function reviews(){
-        return $this->hasMany(Review::class, 'sanpham_id','id');
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'sanpham_id', 'id');
+    }
+
+    public function sanphamDetails()
+    {
+        return $this->hasMany(SanphamDetail::class, 'sanpham_id', 'id');
     }
 
     // use in saleoff-product.blade
-    public function nhomsanpham(){
+    public function nhomsanpham()
+    {
         return Nhomsanpham::find($this->nhomsanphamid);
     }
 }
-
-

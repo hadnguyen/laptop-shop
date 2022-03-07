@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Sanpham;
 use Illuminate\Http\Request;
 use App\Models\Nhomsanpham;
+use App\Models\SanphamDetail;
 use Illuminate\Support\Facades\File;
 
 class SanphamController extends Controller
@@ -16,11 +17,10 @@ class SanphamController extends Controller
      */
     public function index()
     {
-        if ($key=request()->key){
-            $data = Sanpham::where('ten', 'like', '%'.$key.'%')->orderby('uutien','DESC')->paginate(5);
-        }
-        else {
-            $data = Sanpham::orderby('uutien','DESC')->paginate(5);
+        if ($key = request()->key) {
+            $data = Sanpham::where('ten', 'like', '%' . $key . '%')->orderby('uutien', 'DESC')->paginate(5);
+        } else {
+            $data = Sanpham::orderby('uutien', 'DESC')->paginate(5);
         }
         return view('admin.sanpham.index', compact('data'));
     }
@@ -32,7 +32,7 @@ class SanphamController extends Controller
      */
     public function create()
     {
-        $nhomsanphams=Nhomsanpham::orderby('ten')->where('trangthai',1)->select('id','ten')->get();
+        $nhomsanphams = Nhomsanpham::orderby('ten')->where('trangthai', 1)->select('id', 'ten')->get();
         return view('admin.sanpham.create', compact('nhomsanphams'));
     }
 
@@ -44,7 +44,7 @@ class SanphamController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->nhomsanphamid == 1){
+        if ($request->nhomsanphamid == 1) {
             $request->validate(
                 [
                     "ten" => 'required|unique:sanpham',
@@ -70,8 +70,7 @@ class SanphamController extends Controller
                     "manhinh.required" => "Cần nhập màn hình"
                 ]
             );
-        }
-        else{
+        } else {
             $request->validate(
                 [
                     "ten" => 'required|unique:sanpham',
@@ -98,7 +97,7 @@ class SanphamController extends Controller
         //
         // }
 
-        if(Sanpham::create($request->all())){
+        if (Sanpham::create($request->all())) {
             return redirect()->route('admin.sanpham.index')->with('success', 'Thêm mới sản phẩm thành công!');
         }
     }
@@ -111,7 +110,16 @@ class SanphamController extends Controller
      */
     public function show(Sanpham $sanpham)
     {
-        //
+        $sanpham_id = $sanpham->id;
+        // dd($sanpham);
+        if ($key = request()->key) {
+            $sanpham_detail = SanphamDetail::where('id', 'like', '%' . $key . '%')
+                ->where('sanpham_id', $sanpham_id)->paginate(5);
+        } else {
+            $sanpham_detail = SanphamDetail::where('sanpham_id', $sanpham_id)->paginate(5);
+        }
+        // dd($sanpham_detail);
+        return view('admin.sanpham_detail.index', compact('sanpham_detail', 'sanpham_id'));
     }
 
     /**
@@ -122,8 +130,8 @@ class SanphamController extends Controller
      */
     public function edit(Sanpham $sanpham)
     {
-        $nhomsanphams=Nhomsanpham::orderby('ten')->where('trangthai',1)->select('id','ten')->get();
-        return view('admin.sanpham.edit', ['sanpham'=>$sanpham, 'nhomsanphams'=>$nhomsanphams]);
+        $nhomsanphams = Nhomsanpham::orderby('ten')->where('trangthai', 1)->select('id', 'ten')->get();
+        return view('admin.sanpham.edit', ['sanpham' => $sanpham, 'nhomsanphams' => $nhomsanphams]);
     }
 
     /**
@@ -135,10 +143,10 @@ class SanphamController extends Controller
      */
     public function update(Request $request, Sanpham $sanpham)
     {
-        if($request->nhomsanphamid == 1){
+        if ($request->nhomsanphamid == 1) {
             $request->validate(
                 [
-                    "ten" => 'required|unique:nhomsanpham,ten,'.$sanpham->id,
+                    "ten" => 'required|unique:nhomsanpham,ten,' . $sanpham->id,
                     "uutien" => 'required',
                     "gia" => 'required',
                     "hangsanxuat" => 'required',
@@ -161,11 +169,10 @@ class SanphamController extends Controller
                     "manhinh.required" => "Cần nhập màn hình"
                 ]
             );
-        }
-        else{
+        } else {
             $request->validate(
                 [
-                    "ten" => 'required|unique:nhomsanpham,ten,'.$sanpham->id,
+                    "ten" => 'required|unique:nhomsanpham,ten,' . $sanpham->id,
                     "uutien" => 'required',
                     "gia" => 'required',
                     "hangsanxuat" => 'required',
@@ -198,10 +205,9 @@ class SanphamController extends Controller
         //     File::delete(public_path('uploads') .'/' . $sanpham->anh);
         // }
 
-        if ($sanpham->update($request->all())){
+        if ($sanpham->update($request->all())) {
             return redirect()->route('admin.sanpham.index')->with('success', 'Cập nhật bản ghi thành công');
-        }
-        else {
+        } else {
             return redirect()->route('admin.sanpham.index')->with('error', "Lỗi cập nhật bản ghi");
         }
     }
@@ -214,7 +220,7 @@ class SanphamController extends Controller
      */
     public function destroy(Sanpham $sanpham)
     {
-        if ($sanpham->details()->count()>0) {
+        if ($sanpham->details()->count() > 0) {
             return redirect()->route("admin.sanpham.index")->with('error', "Không thể xóa sản phẩm này do đang có trong đơn hàng");
         } else {
             $sanpham->delete();
