@@ -87,202 +87,31 @@ class ProductSearch extends Component
 
     public function render()
     {
-        // $query = new Sanpham();
-        // if ($this->key) {
-        //     $query->where('ram', 'like', '%' . $this->key . '%');
-        // }
-        // if ($this->hsx)
-        //     $query->where('hangsanxuat', 'like', '%' . $this->hsx . '%');
-        // if ($this->ram)
-        //     $query->where('ram', 'like', '%' . $this->ram . '%');
+        $query = new Sanpham();
 
-        // $products = $query->paginate(6);
-
-        if (!is_null($this->selectionCatid)) {
-            if ($this->sortid == 1) {
-                if (!is_null($this->key)) {
-                    if ($this->selectionCatid == 1) {
-                        $products = Sanpham::where('nhomsanphamid', $this->selectionCatid)
-                            ->where('gia', '>=', $this->minPrice)
-                            ->where('gia', '<=', $this->maxPrice)
-                            ->where('ram', 'like', '%' . $this->ram . '%')
-                            ->where('hangsanxuat', 'like', '%' . $this->hsx . '%')
-                            ->where('ten', 'like', '%' . $this->key . '%')
-                            ->orderBy('gia', 'asc')->paginate(6);
-                    } else {
-                        $products = Sanpham::where('nhomsanphamid', $this->selectionCatid)
-                            ->where('gia', '>=', $this->minPrice)
-                            ->where('gia', '<=', $this->maxPrice)
-                            ->where('ten', 'like', '%' . $this->key . '%')
-                            ->orderBy('gia', 'asc')->paginate(6);
-                    }
-                } else {
-                    if ($this->selectionCatid == 1) {
-                        $products = Sanpham::where('nhomsanphamid', $this->selectionCatid)
-                            ->where('gia', '>=', $this->minPrice)
-                            ->where('gia', '<=', $this->maxPrice)
-                            ->where('ram', 'like', '%' . $this->ram . '%')
-                            ->where('hangsanxuat', 'like', '%' . $this->hsx . '%')
-                            ->orderBy('gia', 'asc')->paginate(6);
-                    } else {
-                        $products = Sanpham::where('nhomsanphamid', $this->selectionCatid)
-                            ->where('gia', '>=', $this->minPrice)
-                            ->where('gia', '<=', $this->maxPrice)
-                            ->orderBy('gia', 'asc')->paginate(6);
-                    }
-                }
-            } elseif ($this->sortid == 2) {
-                if (!is_null($this->key)) {
-                    if ($this->selectionCatid == 1) {
-                        $products = Sanpham::where('nhomsanphamid', $this->selectionCatid)
-                            ->where('gia', '>=', $this->minPrice)
-                            ->where('gia', '<=', $this->maxPrice)
-                            ->where('ram', 'like', '%' . $this->ram . '%')
-                            ->where('hangsanxuat', 'like', '%' . $this->hsx . '%')
-                            ->where('ten', 'like', '%' . $this->key . '%')
-                            ->orderBy('gia', 'desc')->paginate(6);
-                    } else {
-                        $products = Sanpham::where('nhomsanphamid', $this->selectionCatid)
-                            ->where('gia', '>=', $this->minPrice)
-                            ->where('gia', '<=', $this->maxPrice)
-                            ->where('ten', 'like', '%' . $this->key . '%')
-                            ->orderBy('gia', 'desc')->paginate(6);
-                    }
-                } else {
-                    if ($this->selectionCatid == 1) {
-                        $products = Sanpham::where('nhomsanphamid', $this->selectionCatid)
-                            ->where('gia', '>=', $this->minPrice)
-                            ->where('gia', '<=', $this->maxPrice)
-                            ->where('ram', 'like', '%' . $this->ram . '%')
-                            ->where('hangsanxuat', 'like', '%' . $this->hsx . '%')
-                            ->orderBy('gia', 'desc')->paginate(6);
-                    } else {
-                        $products = Sanpham::where('nhomsanphamid', $this->selectionCatid)
-                            ->where('gia', '>=', $this->minPrice)
-                            ->where('gia', '<=', $this->maxPrice)
-                            ->orderBy('gia', 'desc')->paginate(6);
-                    }
-                }
-            } else {
-                if (!is_null($this->key)) {
-                    if ($this->selectionCatid == 1) {
-                        $products = Sanpham::where('nhomsanphamid', $this->selectionCatid)
-                            ->where('gia', '>=', $this->minPrice)
-                            ->where('gia', '<=', $this->maxPrice)
-                            ->where('ram', 'like', '%' . $this->ram . '%')
-                            ->where('hangsanxuat', 'like', '%' . $this->hsx . '%')
-                            ->where('ten', 'like', '%' . $this->key . '%')
-                            ->paginate(6);
-                    } else {
-                        $products = Sanpham::where('nhomsanphamid', $this->selectionCatid)
-                            ->where('gia', '>=', $this->minPrice)
-                            ->where('gia', '<=', $this->maxPrice)
-                            ->where('ten', 'like', '%' . $this->key . '%')
-                            ->paginate(6);
-                    }
-                } else {
-                    if ($this->selectionCatid == 1) {
-                        $products = Sanpham::where('nhomsanphamid', $this->selectionCatid)
-                            ->where('gia', '>=', $this->minPrice)
-                            ->where('gia', '<=', $this->maxPrice)
-                            ->where('ram', 'like', '%' . $this->ram . '%')
-                            ->where('hangsanxuat', 'like', '%' . $this->hsx . '%')
-                            ->paginate(6);
-                    } else {
-                        $products = Sanpham::where('nhomsanphamid', $this->selectionCatid)
-                            ->where('gia', '>=', $this->minPrice)
-                            ->where('gia', '<=', $this->maxPrice)
-                            ->paginate(6);
-                    }
-                }
-            }
-        } else {
-            if ($this->sortid == 1) {
-                if (!is_null($this->key)) {
-                    if ($this->selectionCatid == 1) {
-                        $products = Sanpham::where('gia', '>=', $this->minPrice)
-                            ->where('gia', '<=', $this->maxPrice)
-                            ->where('ram', 'like', '%' . $this->ram . '%')
-                            ->where('hangsanxuat', 'like', '%' . $this->hsx . '%')
-                            ->where('ten', 'like', '%' . $this->key . '%')
-                            ->orderBy('gia', 'asc')->paginate(6);
-                    } else {
-                        $products = Sanpham::where('gia', '>=', $this->minPrice)
-                            ->where('gia', '<=', $this->maxPrice)
-                            ->where('ten', 'like', '%' . $this->key . '%')
-                            ->orderBy('gia', 'asc')->paginate(6);
-                    }
-                } else {
-                    if ($this->selectionCatid == 1) {
-                        $products = Sanpham::where('gia', '>=', $this->minPrice)
-                            ->where('gia', '<=', $this->maxPrice)
-                            ->where('ram', 'like', '%' . $this->ram . '%')
-                            ->where('hangsanxuat', 'like', '%' . $this->hsx . '%')
-                            ->orderBy('gia', 'asc')->paginate(6);
-                    } else {
-                        $products = Sanpham::where('gia', '>=', $this->minPrice)
-                            ->where('gia', '<=', $this->maxPrice)
-                            ->orderBy('gia', 'asc')->paginate(6);
-                    }
-                }
-            } elseif ($this->sortid == 2) {
-                if (!is_null($this->key)) {
-                    if ($this->selectionCatid == 1) {
-                        $products = Sanpham::where('gia', '>=', $this->minPrice)
-                            ->where('gia', '<=', $this->maxPrice)
-                            ->where('ram', 'like', '%' . $this->ram . '%')
-                            ->where('hangsanxuat', 'like', '%' . $this->hsx . '%')
-                            ->where('ten', 'like', '%' . $this->key . '%')
-                            ->orderBy('gia', 'desc')->paginate(6);
-                    } else {
-                        $products = Sanpham::where('gia', '>=', $this->minPrice)
-                            ->where('gia', '<=', $this->maxPrice)
-                            ->where('ten', 'like', '%' . $this->key . '%')
-                            ->orderBy('gia', 'desc')->paginate(6);
-                    }
-                } else {
-                    if ($this->selectionCatid == 1) {
-                        $products = Sanpham::where('gia', '>=', $this->minPrice)
-                            ->where('gia', '<=', $this->maxPrice)
-                            ->where('ram', 'like', '%' . $this->ram . '%')
-                            ->where('hangsanxuat', 'like', '%' . $this->hsx . '%')
-                            ->orderBy('gia', 'desc')->paginate(6);
-                    } else {
-                        $products = Sanpham::where('gia', '>=', $this->minPrice)
-                            ->where('gia', '<=', $this->maxPrice)
-                            ->orderBy('gia', 'desc')->paginate(6);
-                    }
-                }
-            } else {
-                if (!is_null($this->key)) {
-                    if ($this->selectionCatid == 1) {
-                        $products = Sanpham::where('gia', '>=', $this->minPrice)
-                            ->where('gia', '<=', $this->maxPrice)
-                            ->where('ram', 'like', '%' . $this->ram . '%')
-                            ->where('hangsanxuat', 'like', '%' . $this->hsx . '%')
-                            ->where('ten', 'like', '%' . $this->key . '%')
-                            ->paginate(6);
-                    } else {
-                        $products = Sanpham::where('gia', '>=', $this->minPrice)
-                            ->where('gia', '<=', $this->maxPrice)
-                            ->where('ten', 'like', '%' . $this->key . '%')
-                            ->paginate(6);
-                    }
-                } else {
-                    if ($this->selectionCatid == 1) {
-                        $products = Sanpham::where('gia', '>=', $this->minPrice)
-                            ->where('gia', '<=', $this->maxPrice)
-                            ->where('ram', 'like', '%' . $this->ram . '%')
-                            ->where('hangsanxuat', 'like', '%' . $this->hsx . '%')
-                            ->paginate(6);
-                    } else {
-                        $products = Sanpham::where('gia', '>=', $this->minPrice)
-                            ->where('gia', '<=', $this->maxPrice)
-                            ->paginate(6);
-                    }
-                }
-            }
+        if ($this->key) {
+            $query = $query->where('ten', 'like', '%' . $this->key . '%');
         }
+        if ($this->selectionCatid) {
+            $query = $query->where('nhomsanphamid', $this->selectionCatid);
+        }
+        if ($this->hsx) {
+            $query = $query->where('hangsanxuat', 'like', '%' . $this->hsx . '%');
+        }
+        if ($this->ram) {
+            $query = $query->where('ram', 'like', '%' . $this->ram . '%');
+        }
+        if ($this->sortid == 1) {
+            $query = $query->orderBy('gia', 'asc');
+        }
+        if ($this->sortid == 2) {
+            $query = $query->orderBy('gia', 'desc');
+        }
+
+        $query = $query->where('gia', '>=', $this->minPrice)
+            ->where('gia', '<=', $this->maxPrice);
+
+        $products = $query->paginate(6);
 
         return view('livewire.product-search', ['products' => $products]);
     }

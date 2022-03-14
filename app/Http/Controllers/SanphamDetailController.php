@@ -19,16 +19,16 @@ class SanphamDetailController extends Controller
         return view('admin.sanpham_detail.index', compact('sanpham_detail', 'sanpham_id'));
     }
 
-    public function create(SanphamDetail $sanpham_id)
+    public function show(SanphamDetail $sanpham_detail)
     {
-        dd($sanpham_id);
-        return view('admin.sanpham_detail.create', compact('sanphams', 'sanpham_id'));
+        $sanpham_id = $sanpham_detail->id;
+        return view('admin.sanpham_detail.create', compact('sanpham_id'));
     }
 
     public function store(Request $request)
     {
         if (SanphamDetail::create($request->all())) {
-            return redirect()->route('admin.sanpham_detail.index')->with('success', 'Thêm mới thành công!');
+            return redirect()->route('admin.sanpham_detail.index', ['id' => $request->sanpham_id])->with('success', 'Thêm mới thành công!');
         }
     }
 

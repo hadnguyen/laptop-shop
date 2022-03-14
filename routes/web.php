@@ -9,7 +9,6 @@ use App\Http\Controllers\AdminLoginController;
 use App\Http\Middleware\CheckAdminLogin;
 use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\Checkout;
 use App\Http\Livewire\ProductDetail;
 /*
 |--------------------------------------------------------------------------

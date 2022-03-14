@@ -7,6 +7,9 @@
         @csrf
         <div class="row">
             <div class="col">
+                <div style="display: none" class="form-group">
+                    <input type="text" name="sanpham_id" value="{{ $sanpham_id }}">
+                </div>
                 <div class="form-group">
                     <label for="trangthai">Trạng thái</label>
                     <select class="form-control" name="trangthai" id="trangthai">

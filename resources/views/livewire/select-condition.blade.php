@@ -97,7 +97,6 @@
         }
 
         function hideFilter() {
-            // alert("Hello");
             document.getElementById('hide-filter').style.display = "none";
         }
     </script>

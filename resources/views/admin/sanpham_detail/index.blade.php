@@ -15,8 +15,8 @@
         </div>
         <div class="col-md-4">
             <div class="text-right">
-                <a class="btn btn-primary" href="{{ route('admin.sanpham_detail.create', $sanpham_id) }}"
-                    role="button">Thêm mới</a>
+                <a class="btn btn-primary" href="{{ route('admin.sanpham_detail.show', $sanpham_id) }}" role="button">Thêm
+                    mới</a>
             </div>
         </div>
     </div>
@@ -37,9 +37,7 @@
                         @if ($d->trangthai == 2)
                             <span class="badge badge-primary">Trong kho</span>
                         @elseif ($d->trangthai == 1)
-                            <span class="badge badge-info">Xuất kho</span>
-                        @else
-                            <span class="badge badge-danger">Đã bán</span>
+                            <span class="badge badge-info">Đã bán</span>
                         @endif
                     </td>
                     <td>{{ $d->created_at }}</td>

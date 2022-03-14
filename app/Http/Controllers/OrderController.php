@@ -95,12 +95,10 @@ class OrderController extends Controller
                 "diachi.required" => "Cần nhập địa chỉ"
             ]
         );
-        dd(date($order->created_at));
-        // $order_date = Order::
+        // dd(date($order->created_at));
+        $order_date = date($order->created_at);
         if ($request->trangthai == 0) {
-            $product_detail = SamphamDetail::whereDate('updated_at', '=', $request->created_at)
-                ->select('id')->get();
-            // dd($product_detail);
+            SanphamDetail::where('updated_at', '=', $order_date)->update(['trangthai' => 2]);
         }
         if ($order->update($request->all())) {
             return redirect()->route('admin.order.index')->with('success', 'Cập nhật bản ghi thành công');

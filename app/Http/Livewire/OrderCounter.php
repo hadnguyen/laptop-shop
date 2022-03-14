@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Order;
+use App\Models\SanphamDetail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -14,6 +15,8 @@ class OrderCounter extends Component
     public function cancelOrder($order_id)
     {
         $order = Order::find($order_id);
+        $order_date = date($order->created_at);
+        SanphamDetail::where('updated_at', '=', $order_date)->update(['trangthai' => 2]);
         $order->trangthai = 0;
         // dd($order);
         $order->save();
